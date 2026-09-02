@@ -1,0 +1,2 @@
+package io.nagode.service;
+public final class PaymentRules { private PaymentRules(){} public static boolean validTransition(String from,String to){return switch(from){case "INITIATED"->to.equals("HELD");case "HELD"->to.equals("AUTHORIZED")||to.equals("REVERSED");case "AUTHORIZED"->to.equals("PENDING")||to.equals("REVERSED");case "PENDING"->to.equals("SETTLED")||to.equals("REVERSED");default->false;};}}
