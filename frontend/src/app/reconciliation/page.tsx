@@ -1,0 +1,4 @@
+'use client';
+import {useEffect,useState} from 'react';
+const API=process.env.NEXT_PUBLIC_API_URL||'http://localhost:8080';
+export default function Reconciliation(){const [r,setR]=useState<any>();async function run(){const x=await fetch(API+'/api/v1/reconciliation/run',{method:'POST',credentials:'include'});setR(await x.json())}useEffect(()=>{fetch(API+'/api/v1/reconciliation',{credentials:'include'}).then(x=>x.json()).then(setR)},[]);return <main className="mx-auto max-w-6xl px-6 py-12"><h1 className="text-3xl font-bold">Reconciliation</h1><div className="card mt-6"><p className="text-slate-400">Ledger and materialized balances are compared without automatic corrective postings.</p><button onClick={run} className="mt-5 rounded-lg bg-amber-400 px-5 py-3 font-semibold text-slate-950">Run reconciliation</button>{r&&<pre className="mt-6 overflow-auto text-sm text-slate-300">{JSON.stringify(r,null,2)}</pre>}</div></main>}

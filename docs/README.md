@@ -1,0 +1,1 @@
+The documentation set for Nagode.io lives in this directory. Financial correctness, security boundaries, cloud deployment, and testing strategy are documented alongside the source.

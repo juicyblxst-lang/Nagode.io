@@ -1,0 +1,3 @@
+package io.nagode;
+import org.junit.jupiter.api.Test;import java.nio.charset.StandardCharsets;import java.security.MessageDigest;import java.util.HexFormat;import static org.junit.jupiter.api.Assertions.*;
+class IdempotencyHashTest{@Test void sha256IsDeterministic()throws Exception{String a=HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest("same-request".getBytes(StandardCharsets.UTF_8)));String b=HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest("same-request".getBytes(StandardCharsets.UTF_8)));assertEquals(a,b);assertNotEquals(a,HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest("different-request".getBytes(StandardCharsets.UTF_8))));}}

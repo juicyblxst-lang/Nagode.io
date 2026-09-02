@@ -1,0 +1,10 @@
+spring:
+  config:
+    activate:
+      on-profile: production
+  datasource:
+    hikari:
+      maximum-pool-size: 20
+nagode:
+  webhook-secret: ${WEBHOOK_SECRET}
+  cors-allowed-origins: ${CORS_ALLOWED_ORIGINS}
