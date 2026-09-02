@@ -1,0 +1,38 @@
+services:
+  - type: web
+    name: nagode-api
+    runtime: docker
+    rootDir: backend
+    plan: 0.5c-512mb
+    healthCheckPath: /actuator/health
+    envVars:
+      - key: SPRING_DATASOURCE_URL
+        fromDatabase:
+          name: nagode-db
+          property: connectionString
+      - key: SPRING_DATASOURCE_USERNAME
+        fromDatabase:
+          name: nagode-db
+          property: user
+      - key: SPRING_DATASOURCE_PASSWORD
+        fromDatabase:
+          name: nagode-db
+          property: password
+      - key: SPRING_DATA_REDIS_URL
+        fromService:
+          type: keyvalue
+          name: nagode-cache
+          property: connectionString
+      - key: WEBHOOK_SECRET
+        sync: false
+      - key: CORS_ALLOWED_ORIGINS
+        sync: false
+      - key: NAGODE_API_KEY
+        sync: false
+  - type: keyvalue
+    name: nagode-cache
+    plan: 256mb
+    ipAllowList: []
+databases:
+  - name: nagode-db
+    plan: basic-256mb
